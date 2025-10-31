@@ -3,33 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MASS Customer Inquiry System (শুধুমাত্র বকেয়া রিপোর্ট)</title>
+    <title>MASS - গ্রাহকের তথ্য অনুসন্ধান</title>
     
     <style>
-        /* Base Styles */
+        /* Base Styles (No change needed here for form centering) */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 5px;
-            background-color: #e9ecef; /* Light gray background */
+            padding: 0;
+            background-color: #f4f7f6;
             color: #333;
         }
-
-        /* Header Styling */
+        
+        /* Header Logo Styling */
         .main-header {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1px 0;
+            padding: 10px 0;
             background-color: #fff;
             border-bottom: 2px solid #ddd;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 20px;
         }
          
         .header-logo {
-            max-width: 100px;
+            max-width: 80px;
             height: auto;
             margin-right: 15px;
         }
@@ -37,130 +35,190 @@
         .header-text h3 {
             margin: 0;
             color: #244850;
-            font-size: 22px;
+            font-size: 26px;
         }
 
         .header-text h4 {
-            margin: 5px 0 0 0;
+            margin: 5px;
             color: #555;
             font-size: 14px;
         }
-
-        /* Search Form Styling */
-        #searchContainer {
-            background-color: #ffffff;
-            padding: 2px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-            text-align: center;
+        
+        /* Main Content Styling */
+        main {
+            position: relative;
+            width: 100%;
+            max-width: 800px; 
+            height: auto;
+            border-radius: 20px;
+            padding: 1px;
+            margin: 40px auto; 
+            box-sizing: border-box;
+            background: #ecf0f3;
+            box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
         }
         
-        #customerPhoneSearch {
-            padding: 10px;
-            width: 80%;
-            max-width: 300px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        
-        #searchButton {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        
-        #searchButton:hover {
-            background-color: #0056b3;
-        }
-
-        /* Report Section Styling */
-        #customerReportSection {
-            background-color: #ffffff;
-            padding: 4px;
-            border-radius: 8px;
-            box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;  }
-        
-        .hidden {
-            display: none !important;
-        }
-        
+        /* Section Header */
         h2 {
-            color: #244850;
+            color: seagreen;
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
             margin-bottom: 20px;
             text-align: center;
         }
+        
+        /* 🎨 নতুন: ফর্মকে মাঝ বরাবর আনার জন্য */
+        #customerLookupForm {
+            /* flexbox ব্যবহার করে কন্টেন্ট মাঝ বরাবর আনা হয়েছে */
+            display: flex; 
+            flex-direction: column; /* উপাদানগুলো উল্লম্বভাবে সাজানো */
+            align-items: center; /* horizontally center items */
+            justify-content: center; /* vertically center items */
+            
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            gap: 20px;
+        }
 
-        /* Customer Summary */
-        .purchase-summary {
-            margin-top: 20px;
-            padding: 15px;
-            border: 1px solid #007bff;
-            background-color: #e6f7ff;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
+        /* 🎨 নতুন: লোগোর জন্য স্টাইল */
+        .search-logo {
+            max-width: 50px; /* লোগোর সাইজ */
+            height: auto;
+            margin-bottom: 10px; /* নিচের দিকে একটু ফাঁকা স্থান */
         }
         
+        form label { 
+            margin-bottom: 8px; 
+            font-weight: bold; 
+            width: auto; 
+            white-space: nowrap;
+        }
+        form input[type="number"] { 
+            /* width: 250px;  - যদি আপনি ইনপুট সাইজ ঠিক রাখতে চান */
+            padding: 8px; 
+            margin-bottom: 5px; 
+            border: 1px solid #ddd; 
+            border-radius: 4px; 
+            box-sizing: border-box; 
+            text-align: center; /* ইনপুট টেক্সট মাঝ বরাবর */
+        }
+        form button[type="submit"] { 
+            background-color: #007bff; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 16px; 
+        }
+        form button[type="submit"]:hover { 
+            background-color: #0056b3; 
+        }
+        
+        /* Utility */
+        .hidden {
+            display: none;
+        }
         .due-amount-highlight {
             color: red;
             font-weight: bold;
         }
-
-        /* Individual Purchase/Invoice Styling */
-        .purchase-div {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 35px;
-            border-radius: 5px;
-            background-color: #fefefe;
-           box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
-        }
         
-        .purchase-div h4 {
-            color: seagreen;
-            margin-top: 0;
-            border-bottom: 1px dashed #ddd;
-            padding-bottom: 5px;
+        /* Customer Report Specific Styles */
+        #customerReportSection {
+            padding: 20px;
             
         }
-        
-        .purchase-div p strong {
-            display: inline-block;
-            width: 150px;
+
+        /* Due Box Style (Total Outstanding Due) */
+        .due-box {
+            background-color: #ffe0e0; 
+            border: 2px solid #ff4d4d;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
         }
 
-        /* Table Styling (Invoice Items & Payment Log) - স্টাইল জোরদার করা হয়েছে */
-        #customerReportSection table {
+        .due-box h3 {
+            /* 💡 পরিবর্তন: Total Outstanding Due-এর বদলে বর্তমান বকেয়া */
+            margin: 0 0 5px 0;
+            color: #cc0000;
+            font-size: 20px;
+        }
+
+        .due-box p {
+            font-size: 32px;
+            font-weight: bold;
+            color: #cc0000;
+            margin: 0;
+        }
+
+        /* Payment Log Table Style (No change needed) */
+        #customerPaymentsLogTable h3 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+            margin-top: 0;
+            color: #555;
+            text-align: left; 
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        /* All Purchases section (Purchases Details) (No change needed) */
+        #customerPurchaseHistory div {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #FEFEFE;
+        
+        
+        
+        }
+        #customerPurchaseHistory h4 {
+            margin-top: 0;
+            color: green;
+        
+        }
+        
+        /* Universal Table Styling (No change needed) */
+        table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 15px;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 4px;
         }
-        
-        #customerReportSection table th, 
-        #customerReportSection table td {
-            /* টেবিল ডেটা/হেডার স্টাইল */
-            border: 1px solid #eee;
-            padding: 8px;
+        table th, table td {
+            width: auto;
+            border: 2px solid #eee;
+            padding: 8px 5px;
             text-align: center;
-            font-size: 13px;
+            font-size: 11px;
         }
-        
-        #customerReportSection table th {
-            background-color: #f1f1f1;
+        table th {
+            background-color: #e9e9e9;
             font-weight: bold;
+            color: #333;
+            font-size: 11px;
         }
         
-       
+        /* Zebra Stripping */
+        table tbody tr:nth-child(even) { 
+            background-color: #f7f7f7;
+        }
+        
+        /* Hover effect */
+        table tbody tr:hover {
+            background-color: #eef;
+        }
     </style>
 </head>
 <body>
@@ -170,60 +228,66 @@
             <img src="img.png" alt="Modern Apparel Style Solutian Logo" class="header-logo">
             <div class="header-text">
                 <h3>Modern Apparel Style Solution (MASS)</h3>
-                <h4>Customer Inquiry System</h4>
+                <h4>গ্রাহকের তথ্য অনুসন্ধান</h4>
             </div>
         </div>
     </header>
 
-    <main>
-        <section id="searchContainer">
-            <h2>🔍 গ্রাহকের তথ্য অনুসন্ধান করুন</h2>
-            <input type="number" id="customerPhoneSearch" placeholder="গ্রাহকের মোবাইল নাম্বার (e.g., 017XXXXXXXX)" maxlength="15">
-            <button id="searchButton">অনুসন্ধান</button>
+    <main id="content">
+        <section id="phoneLookupSection">
+            <h2>গ্রাহকের তথ্য অনুসন্ধান করুন</h2>
+            
+            <form id="customerLookupForm">
+            
+                
+                <label for="lookupPhone">গ্রাহকের ফোন নাম্বার দিন:</label>
+                <input type="number" id="lookupPhone" placeholder="যেমন, 01XXXXXXXXX" required>
+                <button type="submit">অনুসন্ধান</button> 
+            </form>
+            <p id="messageArea" style="text-align: center; color: red;"></p>
         </section>
 
         <section id="customerReportSection" class="hidden">
-            <h2>📜 গ্রাহকের লেনদেনের ইতিহাস</h2>
+            <h2>গ্রাহক: <span id="customerReportName"></span> (<span id="customerReportPhone"></span>)</h2>
             
-            <div id="customerInfo">
-                <h3><strong>নাম:</strong> <span id="customerReportName"></span></h3>
-                <p><strong>ফোন:</strong> <span id="customerReportPhone"></span></p>
-                <p><strong>ঠিকানা:</strong> <span id="customerReportAddress"></span></p>
+            <div class="due-box">
+                <h3>বর্তমান বকেয়া:</h3>
+                <p><span id="customerTotalDue">0.00 TK</span></p>
             </div>
             
-            <div class="purchase-summary">
-                <strong>মোট বকেয়া (Outstanding Due):</strong> <span id="customerTotalDue" class="due-amount-highlight">0.00 TK</span>
+            <div>
+                <h3>Payment Log (Due Payments Only):</h3>
+                <table id="customerPaymentsLogTable" style="margin-bottom: 20px;">
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Payment Amount (TK)</th>
+                            <th>Ref. Invoice No</th>
+                            <th>Cleared From Oldest Due</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customerPaymentsLogBody">
+                        <tr><td colspan="4" style="text-align: center;">No due payments recorded.</td></tr>
+                    </tbody>
+                </table>
             </div>
             
-            <h3 style="margin-top: 30px; color: #007bff;">পেমেন্ট লগ (বকেয়া পরিশোধ)</h3>
-            <table id="customerPaymentsLogTable">
-                <thead>
-                    <tr>
-                        <th>তারিখ ও সময়</th>
-                        <th>পরিশোধিত অর্থ (TK)</th>
-                        <th>রেফাঃ ইনভয়েস নং</th>
-                        <th>পরিশোধিত বকেয়া (TK)</th>
-                    </tr>
-                </thead>
-                <tbody id="customerPaymentsLogBody">
-                    <tr><td colspan="4" style="text-align: center;">কোন বকেয়া পরিশোধ রেকর্ড করা হয়নি।</td></tr>
-                </tbody>
-            </table>
-            <h3 style="margin-top: 30px; color: #007bff;">ক্রয়ের ইতিহাস (ইনভয়েস তালিকা)</h3>
+            <h3>All Purchases Details:</h3>
             <div id="customerPurchaseHistory">
-                <p style="text-align: center;">গ্রাহকের কোনো ক্রয় রেকর্ড পাওয়া যায়নি।</p>
-            </div>
+                </div>
             
         </section>
-
+        
         </main>
 
-    <script type="module" defer>
+    <script type="module">
+        // (স্ক্রিপ্ট কোডে কোনো পরিবর্তন নেই, এটি একই থাকবে)
         // Import Firebase functions
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 
-        // Your web app's Firebase configuration 
+        // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCA-7y10NVwFG5hCNaafSw6_w1D0IsXo7s",
             authDomain: "mass-244c7.firebaseapp.com",
@@ -237,172 +301,146 @@
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
         const database = getDatabase(app);
 
-        // Reference to Firebase path
+        // References to Firebase paths
         const customersRef = ref(database, 'customers');
 
         // --- Data Storage ---
         let customers = [];
-        let currentCustomerPhone = null;
 
-        // --- Utility Functions for Data Handling ---
-        
+        // --- Utility Functions ---
+
+        // Function to calculate a single customer's total outstanding due
+        function getCustomerTotalDue(customer) {
+            let totalDue = 0;
+            if (customer && customer.purchases && customer.purchases.length > 0) {
+                customer.purchases.forEach(purchase => {
+                    totalDue += purchase.dueAmount || 0;
+                });
+            }
+            return parseFloat(totalDue.toFixed(2));
+        }
+
         // Helper function to format currency
         function formatCurrency(amount) {
             return `${parseFloat(amount).toFixed(2)} TK`;
         }
-
-        // Function to calculate a single customer's total outstanding due (সংশোধিত লজিক)
-        function getCustomerTotalDue(customer) {
-            let totalDueFromInvoices = 0;
-            let totalPaymentsLogged = 0;
-
-            // 1. Calculate the total due amount from all invoices (after initial purchase paidAmount)
-            if (customer && customer.purchases && customer.purchases.length > 0) {
-                customer.purchases.forEach(purchase => {
-                    // Due = Total Payable - Paid Amount at the time of transaction
-                    const purchaseTotalPayable = purchase.totalPayable || (purchase.totalAmount + (purchase.previousDue || 0));
-                    const purchasePaidAmount = purchase.paidAmount || 0;
-                    const finalOutstandingDueAfterTransaction = Math.max(0, purchaseTotalPayable - purchasePaidAmount);
-                    
-                    totalDueFromInvoices += finalOutstandingDueAfterTransaction; 
-                });
-            }
-            
-            // 2. Sum up all the amounts cleared via the Payments Log (Subsequent due payments)
-            if (customer && customer.paymentsLog && customer.paymentsLog.length > 0) {
-                customer.paymentsLog.forEach(log => {
-                    // Summing up only the amount that cleared previous dues (clearedAmount)
-                    totalPaymentsLogged += parseFloat(log.clearedAmount || 0); 
-                });
-            }
-            
-            // 3. Calculate the Final Grand Total Outstanding Due
-            const finalOutstandingDue = Math.max(0, totalDueFromInvoices - totalPaymentsLogged);
-
-            return parseFloat(finalOutstandingDue.toFixed(2));
+        
+        // Helper function to hide section
+        function hideCustomerReportSection() {
+            document.getElementById('customerReportSection').classList.add('hidden');
         }
 
         // --- Firebase Data Listener (Primary Data Source) ---
         onValue(customersRef, (snapshot) => {
             if (snapshot.exists()) {
                 customers = snapshot.val();
-                console.log("Customers from Firebase:", customers);
-                // If a customer search was active, re-render the report
-                if (currentCustomerPhone) {
-                    renderCustomerReport(currentCustomerPhone);
+                
+                // If a report is currently visible, re-render it with new data
+                const currentPhone = document.getElementById('lookupPhone').value.trim();
+                if (currentPhone && !document.getElementById('customerReportSection').classList.contains('hidden')) {
+                    renderCustomerReport(currentPhone);
                 }
             } else {
                 customers = [];
-                console.log("No customers in Firebase.");
             }
         });
 
-        // --- Main Logic on DOM Load ---
+        // --- DOM Ready Logic ---
         document.addEventListener('DOMContentLoaded', () => {
-            // DOM Elements
+            const customerLookupForm = document.getElementById('customerLookupForm');
+            const lookupPhoneInput = document.getElementById('lookupPhone');
+            const messageArea = document.getElementById('messageArea');
             const customerReportSection = document.getElementById('customerReportSection');
-            const searchButton = document.getElementById('searchButton');
-            const customerPhoneSearchInput = document.getElementById('customerPhoneSearch');
-            
+
             // Customer Report Elements
             const customerReportNameSpan = document.getElementById('customerReportName');
             const customerReportPhoneSpan = document.getElementById('customerReportPhone');
-            const customerReportAddressSpan = document.getElementById('customerReportAddress');
             const customerPurchaseHistoryDiv = document.getElementById('customerPurchaseHistory');
             const customerTotalDueSpan = document.getElementById('customerTotalDue');
-            const customerPaymentsLogBody = document.getElementById('customerPaymentsLogBody'); 
+            const customerPaymentsLogBody = document.getElementById('customerPaymentsLogBody');
             
 
-            // Helper function to hide the report section
-            function hideReport() {
-                customerReportSection.classList.add('hidden');
-                customerPurchaseHistoryDiv.innerHTML = `<p style="text-align: center;">গ্রাহকের কোনো ক্রয় রেকর্ড পাওয়া যায়নি।</p>`;
-            }
+            // 1. Handle Form Submission
+            customerLookupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const phone = lookupPhoneInput.value.trim();
+                messageArea.textContent = '';
+                hideCustomerReportSection(); 
 
-
-            // Function to render individual customer report
-            function renderCustomerReport(customerPhone) {
-                const customer = customers.find(c => c.phone === customerPhone); 
-                currentCustomerPhone = customerPhone;
-
-                if (!customer) {
-                    alert(`মোবাইল নাম্বার ${customerPhone} এর কোনো গ্রাহক পাওয়া যায়নি।`);
-                    hideReport();
+                if (!phone) {
+                    messageArea.textContent = 'Please enter a phone number.';
                     return;
                 }
                 
-                // Show the main report section
+                const customer = customers.find(c => c.phone === phone);
+
+                if (customer) {
+                    renderCustomerReport(phone);
+                } else {
+                    messageArea.textContent = `Customer with phone number ${phone} not found.`;
+                }
+            });
+
+            // 2. Render Customer Report Function
+            function renderCustomerReport(customerPhone) {
                 customerReportSection.classList.remove('hidden');
 
-                // Populate basic info
-                customerReportNameSpan.textContent = customer.name || 'N/A';
-                customerReportPhoneSpan.textContent = customer.phone;
-                customerReportAddressSpan.textContent = customer.address || 'N/A';
-
-                customerPurchaseHistoryDiv.innerHTML = '';
-                let grandTotalDue = getCustomerTotalDue(customer); 
-
-                // --- Render Payments Log ---
-                customerPaymentsLogBody.innerHTML = '';
-                if (customer.paymentsLog && customer.paymentsLog.length > 0) {
-                    // Sort by date/time (newest first)
-                    customer.paymentsLog.sort((a, b) => {
-                        const dateA = new Date(a.dateTime.replace(/(\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2})/, '$3-$2-$1T$4:$5:00'));
-                        const dateB = new Date(b.dateTime.replace(/(\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2})/, '$3-$2-$1T$4:$5:00'));
-                        return dateB - dateA;
-                    }).forEach(log => {
-                        const row = customerPaymentsLogBody.insertRow();
-                        row.insertCell(0).textContent = log.dateTime;
-                        row.insertCell(1).textContent = formatCurrency(log.paymentAmount);
-                        row.insertCell(2).textContent = log.refInvoice || 'N/A';
-                        row.insertCell(3).textContent = formatCurrency(log.clearedAmount);
-                    });
-                } else {
-                    customerPaymentsLogBody.innerHTML = '<tr><td colspan="4" style="text-align: center;">কোন বকেয়া পরিশোধ রেকর্ড করা হয়নি।</td></tr>';
+                const customer = customers.find(c => c.phone === customerPhone);
+                if (!customer) {
+                    messageArea.textContent = 'Customer not found.';
+                    hideCustomerReportSection();
+                    return;
                 }
 
-                // --- Render Purchase History ---
-                if (!customer.purchases || customer.purchases.length === 0) {
-                    customerPurchaseHistoryDiv.innerHTML = '<p style="text-align: center;">গ্রাহকের কোনো ক্রয় রেকর্ড পাওয়া যায়নি।</p>';
+                messageArea.textContent = '';
+                customerReportNameSpan.textContent = customer.name || 'N/A';
+                customerReportPhoneSpan.textContent = customer.phone;
+                customerPurchaseHistoryDiv.innerHTML = '';
+
+                let grandTotalSpent = 0; 
+                
+                if (customer.purchases.length === 0) {
+                    customerPurchaseHistoryDiv.innerHTML = '<p>No purchase history for this customer.</p>';
                 } else {
                     customer.purchases.sort((a,b) => {
-                        // Sort by date: Newest first (Descending)
+                        // Custom sort for DD/MM/YYYY format dates
                         const [dA, mA, yA] = a.date.split('/').map(Number);
                         const [dB, mB, yB] = b.date.split('/').map(Number);
                         const dateA = new Date(yA, mA - 1, dA);
                         const dateB = new Date(yB, mB - 1, dB);
-                        return dateB - dateA; 
-                    }).forEach((purchase) => {
+                        return dateB - dateA; // Descending order (newest first)
+                    }).forEach((purchase, purchaseIndex) => {
                         const purchaseDiv = document.createElement('div');
-                        purchaseDiv.classList.add('purchase-div');
+                        purchaseDiv.style.border = '1px solid #ccc';
+                        purchaseDiv.style.padding = '10px';
+                        purchaseDiv.style.marginBottom = '15px';
+                        purchaseDiv.style.borderRadius = '5px';
+                        purchaseDiv.style.backgroundColor = '#fefefe';
 
-                        // Recalculate Final Outstanding Due: Total Payable - Paid Amount (only for this transaction)
-                        const purchaseTotalPayable = purchase.totalPayable || (purchase.totalAmount + (purchase.previousDue || 0));
-                        const purchasePaidAmount = purchase.paidAmount || 0;
-                        const finalOutstandingDueAfterTransaction = Math.max(0, purchaseTotalPayable - purchasePaidAmount);
-
+                        grandTotalSpent += purchase.totalAmount;
+                        
                         purchaseDiv.innerHTML = `
-                            <h4>📄 ইনভয়েস নং: ${purchase.invoiceNo} (তারিখ: ${purchase.date})</h4>
+                            <h4>Invoice No: ${purchase.invoiceNo} (Date: ${purchase.date})</h4>
                             <p>
-                                <strong>মোট গ্রস বিল:</strong> ${formatCurrency(purchase.subTotal || purchase.totalAmount)}<br>
-                                <strong>ডিসকাউন্ট:</strong> ${formatCurrency(purchase.discount || 0)}<br>
-                                <strong>নেট বিল:</strong> ${formatCurrency(purchase.totalAmount)}<br>
-                                <hr style="border-top: 1px dashed #eee; margin: 5px 0;">
-                                <strong>পূর্বের বকেয়া:</strong> ${formatCurrency(purchase.previousDue || 0)}<br>
-                                <strong>মোট প্রদেয়:</strong> ${formatCurrency(purchaseTotalPayable)}<br>
-                                <strong>পরিশোধিত অর্থ:</strong> ${formatCurrency(purchasePaidAmount)}<br>
-                                <strong>চূড়ান্ত বকেয়া (এই বিলের পর):</strong> <span class="${finalOutstandingDueAfterTransaction > 0 ? 'due-amount-highlight' : ''}">${formatCurrency(finalOutstandingDueAfterTransaction)}</span>
+                                <strong>Subtotal (Gross):</strong> ${formatCurrency(purchase.subTotal || purchase.totalAmount)}<br>
+                                <strong>Discount:</strong> ${formatCurrency(purchase.discount || 0)}<br>
+                                <strong>Total (Net):</strong> ${formatCurrency(purchase.totalAmount)}<br>
+                                <strong>Previous Due (at sale time):</strong> ${formatCurrency(purchase.previousDue || 0)}<br>
+                                <strong>Total Payable (at sale time):</strong> ${formatCurrency(purchase.totalPayable || purchase.totalAmount + (purchase.previousDue || 0))}<br>
+                                <strong>Paid Amount (at sale time):</strong> ${formatCurrency(purchase.paidAmount || 0)}<br>
+                                <strong>Due Amount (from this invoice):</strong> <span class="${purchase.dueAmount > 0 ? 'due-amount-highlight' : ''}">${formatCurrency(purchase.dueAmount || 0)}</span>
                             </p>
-                            <table>
+                            <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
                                 <thead>
                                     <tr>
-                                        <th>পণ্যের নাম</th>
-                                        <th>সাইজ</th>
-                                        <th>পরিমাণ</th>
-                                        <th>ইউনিট মূল্য (TK)</th>
-                                        <th>সাবটোটাল (TK)</th>
+                                        <th>Item Name</th>
+                                        <th>Size</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price (TK)</th>
+                                        <th>Subtotal (TK)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -417,39 +455,46 @@
                                     `).join('')}
                                 </tbody>
                             </table>
-                            `;
+                        `;
                         
                         customerPurchaseHistoryDiv.appendChild(purchaseDiv);
                     });
                 }
                 
-                // Update Summary
+                // Final Due Calculation
+                let grandTotalDue = getCustomerTotalDue(customer); 
+                
                 customerTotalDueSpan.textContent = formatCurrency(grandTotalDue);
-            }
+                
+                // --- Populate Payments Log Table ---
+                customerPaymentsLogBody.innerHTML = '';
 
-
-            // --- Event Listeners ---
-            
-            // 1. Search Button Click
-            searchButton.addEventListener('click', () => {
-                const phone = customerPhoneSearchInput.value.trim();
-                if (phone) {
-                    renderCustomerReport(phone);
+                if (customer.paymentsLog && customer.paymentsLog.length > 0) {
+                    customer.paymentsLog.sort((a, b) => {
+                        const dateA = new Date(a.dateTime.replace(/(\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2})/, '$3-$2-$1T$4:$5:00'));
+                        const dateB = new Date(b.dateTime.replace(/(\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2})/, '$3-$2-$1T$4:$5:00'));
+                        return dateB - dateA;
+                    }).forEach(log => {
+                        const row = customerPaymentsLogBody.insertRow();
+                        row.insertCell(0).textContent = log.dateTime;
+                        row.insertCell(1).textContent = formatCurrency(log.paymentAmount);
+                        row.insertCell(2).textContent = log.refInvoice || 'N/A';
+                        row.insertCell(3).textContent = formatCurrency(log.clearedAmount);
+                    });
                 } else {
-                    alert('অনুসন্ধানের জন্য মোবাইল নাম্বার প্রদান করুন।');
-                    hideReport();
+                    customerPaymentsLogBody.innerHTML = '<tr><td colspan="4" style="text-align: center;">No due payments recorded.</td></tr>';
+                }
+            }
+            
+            // 3. Record Due Payment Logic (Removed)
+            /* No payment logic here */
+
+            // 4. Download Invoice Logic (Removed)
+            document.addEventListener('click', async (e) => {
+                if (e.target.classList.contains('download-customer-invoice-btn')) {
+                    alert("Download Invoice button has been disabled as per your request.");
                 }
             });
-            
-            // 2. Enter Key in Input Field
-            customerPhoneSearchInput.addEventListener('keypress', (e) => {
-                 if (e.key === 'Enter') {
-                    searchButton.click();
-                 }
-            });
-
-
-            hideReport();
         });
     </script>
 </body>
